@@ -25,7 +25,7 @@ export default class MainNavigation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'Knowledge'
+      selectedTab: 'Results'
     }
   }
 
