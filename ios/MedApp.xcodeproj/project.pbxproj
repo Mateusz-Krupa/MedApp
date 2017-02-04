@@ -218,9 +218,9 @@
 			remoteGlobalIDString = 0CF68AC11AF0540F00FF9E5C;
 			remoteInfo = RNSVG;
 		};
-		9E1E43801E428EA6002E7A1D /* PBXContainerItemProxy */ = {
+		9E1E43BC1E4461CE002E7A1D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9E1E437C1E428EA6002E7A1D /* ART.xcodeproj */;
+			containerPortal = 9E1E43B81E4461CE002E7A1D /* ART.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 0CF68AC11AF0540F00FF9E5C;
 			remoteInfo = ART;
@@ -252,8 +252,8 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		9A935BAEBD164E5BBBE32712 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSVG.xcodeproj; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; };
-		9E1E437C1E428EA6002E7A1D /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ART.xcodeproj; sourceTree = "<group>"; };
 		9E1E43831E428EC8002E7A1D /* libART.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libART.a; path = "../node_modules/react-native/Libraries/ART/build/Debug-iphoneos/libART.a"; sourceTree = "<group>"; };
+		9E1E43B81E4461CE002E7A1D /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -415,7 +415,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				9E1E437C1E428EA6002E7A1D /* ART.xcodeproj */,
+				9E1E43B81E4461CE002E7A1D /* ART.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -471,20 +471,20 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9E1E437D1E428EA6002E7A1D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				9E1E43811E428EA6002E7A1D /* libART.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		9E1E43821E428EC8002E7A1D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				9E1E43831E428EC8002E7A1D /* libART.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9E1E43B91E4461CE002E7A1D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9E1E43BD1E4461CE002E7A1D /* libART.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -558,8 +558,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 9E1E437D1E428EA6002E7A1D /* Products */;
-					ProjectRef = 9E1E437C1E428EA6002E7A1D /* ART.xcodeproj */;
+					ProductGroup = 9E1E43B91E4461CE002E7A1D /* Products */;
+					ProjectRef = 9E1E43B81E4461CE002E7A1D /* ART.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
@@ -801,11 +801,11 @@
 			remoteRef = 9E1E436E1E427609002E7A1D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		9E1E43811E428EA6002E7A1D /* libART.a */ = {
+		9E1E43BD1E4461CE002E7A1D /* libART.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libART.a;
-			remoteRef = 9E1E43801E428EA6002E7A1D /* PBXContainerItemProxy */;
+			remoteRef = 9E1E43BC1E4461CE002E7A1D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

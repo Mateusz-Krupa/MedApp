@@ -7,7 +7,7 @@
 import React, { Component, PropTypes } from 'react';
 import Status from '../Status/Status';
 import TimeLine from '../TimeLine/TimeLine';
-import Results from '../Results/Results';
+import ResultsNavigator from '../Results/ResultsNavigator';
 import Knowledge from '../Knowledge/Knowledge';
 import More from '../More/More';
 
@@ -67,7 +67,7 @@ export default class MainNavigation extends Component {
               selectedTab: 'Results',
             });
           } } >
-          <Results></Results>
+          <ResultsNavigator></ResultsNavigator>
         </TabBarIOS.Item>
 
         <TabBarIOS.Item
