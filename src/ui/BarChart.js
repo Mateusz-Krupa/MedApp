@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { View, Dimensions, TouchableWithoutFeedback } from 'react-native'
 
 import Svg, {
@@ -37,27 +37,27 @@ const colours = {
 
 // create the barchart (http://bl.ocks.org/mbostock/3885304)
 
-
-
 export default class BarChart extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-        barColour: this.props.data.map(() => colours.bar)
+      barColour: this.props.data.map(() => this.props.bar)
     }
   }
+
+
   toggleHighlight(i) {
     this.setState({
       barColour: [
         ...this.state.barColour.slice(0, i),
-        this.state.barColour[i] === colours.bar ? colours.selected : colours.bar,
+        this.state.barColour[i] === this.props.bar ? this.props.selected : this.props.bar,
         ...this.state.barColour.slice(i + 1)
       ]
     })
   }
 
-  render() {
+  createGraph() {
     const screen = Dimensions.get('window')
     const margin = { top: 10, right: 20, bottom: 40, left: 30 }
     const width = screen.width - margin.left - margin.right
@@ -65,21 +65,26 @@ export default class BarChart extends Component {
     const x = scaleBand()
       .rangeRound([0, width])
       .padding(0.6)
-      .domain(this.props.data.map(d => d.letter))
-    const maxFrequency = max(this.props.data, d => d.frequency)
+      .domain(this.props.data.map(d => d.label))
+    const maxFrequency = max(this.props.data, d => d.value)
     const y = scaleLinear()
       .rangeRound([height, 0])
       .domain([0, maxFrequency])
 
-    const firstLetterX = x(this.props.data[0].letter)
-    const secondLetterX = x(this.props.data[1].letter)
-    const lastLetterX = x(this.props.data[this.props.data.length - 1].letter)
-    const labelDx = (secondLetterX - firstLetterX) / 2
+    const firstLabelX = x(this.props.data[0].label)
+    const secondLabelX = x(this.props.data[1].label)
+    const lastLabelX = x(this.props.data[this.props.data.length - 1].label)
+    const labelDx = (secondLabelX - firstLabelX) - 20
 
-    const bottomAxis = [firstLetterX - labelDx, lastLetterX + labelDx]
+    const bottomAxis = [firstLabelX - labelDx, lastLabelX + labelDx]
     const bottomAxisD = line()
       .x(d => d + labelDx)
       .y(() => 0)
+      (bottomAxis)
+
+    const middleAxisD = line()
+      .x(d => d + labelDx)
+      .y(() => 50)
       (bottomAxis)
 
     const leftAxis = ticks(0, maxFrequency, 5)
@@ -96,20 +101,23 @@ export default class BarChart extends Component {
         <G translate={margin.left + "," + margin.top}>
           <G translate={"0," + height}>
             <G key={-1}>
-              <Path stroke={colours.lineColor} d={bottomAxisD} key="-1" />
+              <Path stroke={this.props.lineColor} d={bottomAxisD} key="-1" />
               {
                 this.props.data.map((d, i) => (
-                  <G key={i + 1} translate={x(d.letter) + labelDx + ",0"}>
-                    <Text fill={colours.text} y={labelDistance}>{d.letter}</Text>
+                  <G key={i + 1} translate={x(d.label) + labelDx + ",0"}>
+                    <Text fill={this.props.text} y={labelDistance}>{d.label}</Text>
                   </G>
                 ))
               }
+            </G>
+            <G key={1}>
+              <Path stroke={this.props.lineColor} d={middleAxisD} key="1" />
             </G>
             <G key={-2}>
               {
                 leftAxis.map((d, i) => (
                   <G key={i + 1} translate={"0," + (y(d) - height)}>
-                    <Text fill={colours.text} x={-labelDistance} y={-notch}>{d}</Text>
+                    <Text fill={this.props.text} x={-labelDistance} y={-notch}>{d}</Text>
                   </G>
                 ))
               }
@@ -117,13 +125,13 @@ export default class BarChart extends Component {
             {
               this.props.data.map((d, i) => (
                 <TouchableWithoutFeedback key={i} onPress={() => this.toggleHighlight(i)}>
-                  <Rect x={x(d.letter)}
-                    y={y(d.frequency) - height}
+                  <Rect x={x(d.label)}
+                    y={y(d.value) - height}
                     width={x.bandwidth()}
-                    height={height - y(d.frequency)}
+                    height={height - y(d.value)}
                     fill={this.state.barColour[i]}
                     rx={3} ry={3}
-                    >
+                  >
                   </Rect>
                 </TouchableWithoutFeedback>
               ))
@@ -135,4 +143,31 @@ export default class BarChart extends Component {
 
     return svg;
   }
+
+  render() {
+    console.log(this.props.data);
+    // console.log("do chuja waclawa");
+    if (this.props.data.length > 2) {
+      console.log(this.props.data);
+      return this.createGraph();
+    }
+    return (<View></View>);
+  }
+
+}
+
+
+BarChart.propTypes = {
+  text: PropTypes.string,
+  lineColor: PropTypes.string,
+  bar: PropTypes.string,
+  selected: PropTypes.string,
+  height: PropTypes.number
+}
+
+BarChart.defaultProps = {
+  text: 'black',
+  lineColor: '#E1E1E6',
+  bar: '#FED131',
+  selected: 'red'
 }

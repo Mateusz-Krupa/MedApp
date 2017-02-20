@@ -1,0 +1,106 @@
+{
+
+  "survey": {
+    "urine": [
+      {
+        "id": "1", 
+        "protein": 4,
+        "creatine": 2,
+        "potassium": 3, 
+        "date": "2016-01-10T10:50:42.389Z" 
+      },
+      {
+        "id": "1", 
+        "protein": 1,
+        "creatine": 3,
+        "potassium": 2, 
+        "date": "2016-02-10T10:50:42.389Z" 
+      },
+      {
+        "id": "1", 
+        "protein": 5,
+        "creatine": 2,
+        "potassium": 5, 
+        "date": "2016-03-10T10:50:42.389Z" 
+      },
+      {
+        "id": "1", 
+        "protein": 3,
+        "creatine": 2,
+        "potassium": 1, 
+        "date": "2016-04-10T10:50:42.389Z" 
+      },
+      {
+        "id": "1", 
+        "protein": 3,
+        "creatine": 1,
+        "potassium": 5, 
+        "date": "2016-05-10T10:50:42.389Z" 
+      },
+      {
+        "id": "1", 
+        "protein": 2,
+        "creatine": 3,
+        "potassium": 5, 
+        "date": "2016-06-10T10:50:42.389Z" 
+      },
+      {
+        "id": "1", 
+        "protein": 4,
+        "creatine": 1,
+        "potassium": 4, 
+        "date": "2016-07-10T10:50:42.389Z" 
+      },
+      {
+        "id": "1", 
+        "protein": 5,
+        "creatine": 5,
+        "potassium": 1, 
+        "date": "2016-08-10T10:50:42.389Z" 
+      },
+      {
+        "id": "1", 
+        "protein": 2,
+        "creatine": 6,
+        "potassium":6 , 
+        "date": "2016-09-10T10:50:42.389Z" 
+      },
+      {
+        "id": "1", 
+        "protein": 4,
+        "creatine": 2,
+        "potassium": 3, 
+        "date": "2016-10-10T10:50:42.389Z" 
+      },
+      {
+        "id": "1", 
+        "protein": 4,
+        "creatine": 4,
+        "potassium": 5, 
+        "date": "2016-11-10T10:50:42.389Z" 
+      },
+      {
+        "id": "1", 
+        "protein": 1,
+        "creatine": 2,
+        "potassium": 5, 
+        "date": "2016-12-10T10:50:42.389Z" 
+      },
+      {
+        "id": "1", 
+        "protein": 4,
+        "creatine": 1,
+        "potassium": 2, 
+        "date": "2016-01-10T10:50:42.389Z" 
+      }
+    ]
+  },
+
+  "posts": [
+    { "id": 1, "title": "json-server", "author": "typicode" }
+  ],
+  "comments": [
+    { "id": 1, "body": "some comment", "postId": 1 }
+  ],
+  "profile": { "name": "typicode" }
+}

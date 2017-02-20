@@ -1,6 +1,7 @@
 import BarChart from '../../ui/BarChart';
 import BoxLinkBar from '../../ui/BoxLinkBar';
 import TopBar from '../../ui/TopBar';
+import ResultsModal from './ResultsModal';
 import React, { Component, PropTypes } from 'react';
 import { COMMON_STYLES } from '../../styles/global';
 import {
@@ -11,38 +12,67 @@ import {
   View,
   ScrollView,
   TouchableHighlight,
-  StatusBar
+  StatusBar,
+  Modal
 } from 'react-native';
 
 export default class Results extends Component {
+
+
   constructor(props) {
     super(props);
     this.data = [
-      { frequency: 2, letter: "1" },
-      { frequency: 5, letter: "2" },
-      { frequency: 4, letter: "3" },
-      { frequency: 1, letter: '4' },
-      { frequency: 2, letter: "5" },
-      { frequency: 3, letter: "6" },
-      { frequency: 1, letter: "7" },
-      { frequency: 2, letter: "8" },
-      { frequency: 3, letter: '9' },
-      { frequency: 1, letter: '10' },
-      { frequency: 2, letter: '11' },
-      { frequency: 3, letter: '12' }
+      { value: 2, label: "1" },
+      { value: 5, label: "2" },
+      { value: 4, label: "3" },
+      { value: 1, label: '4' },
+      { value: 2, label: "5" },
+      { value: 3, label: "6" },
+      { value: 1, label: "7" },
+      { value: 2, label: "8" },
+      { value: 3, label: '9' },
+      { value: 1, label: '10' },
+      { value: 2, label: '11' },
+      { value: 3, label: '12' }
     ]
     this.config = {
       height: 140,
-      colors: {
-        text: 'black',
-        lineColor: '#ccc',
-        bar: '#FED131',
-        selected: 'red'
-      }
     }
+
+    this.setResultsModalVisible = (visible) => {
+      this.setState({ resultsModalVisible: visible });
+    };
+
+    this.state = {
+      resultsModalVisible: false,
+      protein: [],
+      creatine: [],
+      potassium: []
+
+    }
+
+    this.getData();
   }
 
-  onPress(){
+
+  getData() {
+    fetch("http://localhost:3000/survey").then(res => res.json())
+      .then((data) => {
+        let protein = data.urine.map(item => { return { value: item.protein, label: "1" } });
+        let creatine = data.urine.map(item => { return { value: item.creatine, label: "1" } });
+        let potassium = data.urine.map(item => { return { value: item.potassium, label: "1" } });
+        this.setState({
+          protein: protein,
+          creatine: creatine,
+          potassium: potassium
+        });
+
+        // console.log(this.state);
+      });
+
+  }
+
+  onPress() {
     alert("ble");
   }
 
@@ -53,20 +83,38 @@ export default class Results extends Component {
           <View style={styles.graphBox}>
             <TopBar onPress={this.onPress} buttonText="More" title="Protein in urine 24h (mg)"></TopBar>
             <View style={COMMON_STYLES.box}>
-              <BarChart data={this.data} config={this.config}></BarChart>
+              <BarChart data={this.state.protein} config={this.config}></BarChart>
             </View>
-            <BoxLinkBar text="See all entries" onPress={this.onPress}> </BoxLinkBar>
+            <BoxLinkBar text="See all entries"
+              onPress={() => {
+                this.setResultsModalVisible(true)
+              }}
+            > </BoxLinkBar>
           </View>
-
 
           <View style={styles.graphBox}>
             <TopBar onPress={this.onPress} buttonText="More" title="Creatinine (ug/dl)"></TopBar>
             <View style={COMMON_STYLES.box}>
-              <BarChart data={this.data} config={this.config}></BarChart>
+              <BarChart data={this.state.creatine} config={this.config} bar="#EF3835"></BarChart>
             </View>
-            <BoxLinkBar text="See all entries" onPress={this.onPress}> </BoxLinkBar>
+            <BoxLinkBar text="See all entries" onPress={() => {
+              this.setResultsModalVisible(true)
+            }}
+            > </BoxLinkBar>
+          </View>
+
+          <View style={styles.graphBox}>
+            <TopBar onPress={this.onPress} buttonText="More" title="Potassium (ug/dl)"></TopBar>
+            <View style={COMMON_STYLES.box}>
+              <BarChart data={this.state.potassium} config={this.config}></BarChart>
+            </View>
+            <BoxLinkBar text="See all entries" onPress={() => {
+              this.setResultsModalVisible(true)
+            }}
+            ></BoxLinkBar>
           </View>
         </View>
+        <ResultsModal resultsModalVisible={this.state.resultsModalVisible} setResultsModalVisible={this.setResultsModalVisible} />
       </ScrollView>
 
     );
@@ -105,10 +153,7 @@ const styles = StyleSheet.create({
   },
 
   link: {
-    color: '#FE2851'
+    color: '#FE2851',
   }
-
-
-
 });
 

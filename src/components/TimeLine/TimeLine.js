@@ -15,12 +15,22 @@ import {
 
 export default class TimeLine extends Component {
 
+  
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
-      <View>
-        <Text>TimeLine</Text>
-        <Text>AAAAA</Text>
-      </View>
+      <ScrollView style={styles.content} scrollEventThrottle={16} onScroll={(event) => { console.log(event.nativeEvent.contentOffset.y)}}>
+        <Text>Status</Text>
+        <Text>Status</Text>
+        <Text>Status</Text>
+        <Text>Status</Text>
+        <Text>Status</Text>
+        <Text>Status</Text>
+        <Text>Status</Text>
+      </ScrollView>
     );
   }
 }
@@ -28,3 +38,4 @@ export default class TimeLine extends Component {
 const styles = StyleSheet.create({
 
 });
+

@@ -1,26 +1,25 @@
 
-/**
-* Sample React Native App
-* https://github.com/facebook/react-native
-* @flow
-*/
-import {COMMON_STYLES} from '../../styles/global'
+import { COMMON_STYLES } from '../../styles/global';
 import React, { Component, PropTypes } from 'react';
-import Results from './Results'
 import {
-  Navigator,
+  AppRegistry,
   StyleSheet,
   Text,
+  View,
+  ScrollView,
+  Navigator
 } from 'react-native';
+import {TimeLine} from './TimeLine'
 
-export default class ResultsNavigator extends Component {
+
+export default class TimeLineNavigator extends Component {
 
   render() {
     return (
       <Navigator
         initialRoute={{ title: 'Awesome Scene', index: 0 }}
         renderScene={(route, navigator) =>
-          <Results></Results>
+             <View><TimeLine /></View>
         }
         style={{ }}
         navigationBar={
@@ -31,7 +30,7 @@ export default class ResultsNavigator extends Component {
               RightButton: (route, navigator, index, navState) =>
               { return; },
               Title: (route, navigator, index, navState) =>
-              { return (<Text style={COMMON_STYLES.navigatorElement}>Results</Text>); },
+              { return (<Text style={COMMON_STYLES.navigatorElement}>TimeLine</Text>); },
             }}
             style={COMMON_STYLES.navigator}
             />
@@ -44,4 +43,3 @@ export default class ResultsNavigator extends Component {
 const styles = StyleSheet.create({
 
 });
-

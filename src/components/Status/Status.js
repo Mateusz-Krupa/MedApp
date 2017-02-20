@@ -15,9 +15,15 @@ import {
 
 export default class Status extends Component {
 
+
+  
+  constructor(props) {
+    super(props);
+  }
+  
   render() {
     return (
-      <ScrollView style={styles.content}>
+      <ScrollView style={styles.content} scrollEventThrottle={16} onScroll={(event) => { console.log(event.nativeEvent.contentOffset.y)}}>
         <Text>Status</Text>
         <Text>Status</Text>
         <Text>Status</Text>

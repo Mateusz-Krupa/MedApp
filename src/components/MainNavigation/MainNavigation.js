@@ -6,7 +6,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import Status from '../Status/Status';
-import TimeLine from '../TimeLine/TimeLine';
+import TimeLineNavigator from '../TimeLine/TimeLineNavigator';
 import ResultsNavigator from '../Results/ResultsNavigator';
 import Knowledge from '../Knowledge/Knowledge';
 import More from '../More/More';
@@ -55,7 +55,7 @@ export default class MainNavigation extends Component {
               selectedTab: 'Timeline',
             });
           } } >
-          <TimeLine></TimeLine>
+          <TimeLineNavigator></TimeLineNavigator>
         </TabBarIOS.Item>
 
         <TabBarIOS.Item
