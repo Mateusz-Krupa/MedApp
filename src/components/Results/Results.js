@@ -15,7 +15,7 @@ import {
   StatusBar,
   Modal
 } from 'react-native';
-import * as actions from '../../actions';
+import * as actions from '../../actions/ResultsActions';
 import configureStore from '../../store';
 
 export default class Results extends Component {

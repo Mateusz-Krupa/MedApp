@@ -10,7 +10,7 @@ import TimeLineNavigator from '../TimeLine/TimeLineNavigator';
 import ResultsNavigator from '../Results/ResultsNavigator';
 import Knowledge from '../Knowledge/Knowledge';
 import More from '../More/More';
-import * as actions from '../../actions';
+import * as actions from '../../actions/NavigationActions';
 
 import { connect } from 'react-redux';
 
@@ -30,23 +30,8 @@ export class MainNavigation extends Component {
     super(props);
   }
 
-  // componentDidMount() {
-  //   this.ubsubscribe = this.store.subscribe(() => {
-  //     this.setState(this.store.getState());
-  //   })
-  // }
-
-  // componentWillUnmount() {
-  //   this.unsubscribe();
-  // }
-
-  // setNavigation(value) {
-  //   console.log(this.state);
-  //   // this.state.actions.mainNavigationAction(value);
-  // }
-
   render() {
-    const {mainNavigation, mainNavigationAction} = this.props;
+    const {mainNavigation, navigation} = this.props;
     return (
       <TabBarIOS
         tintColor={styles.navigationButtonText.color}
@@ -54,7 +39,7 @@ export class MainNavigation extends Component {
         <TabBarIOS.Item
           title="Status"
           icon={require('./icons/Status.png')}
-          selected={mainNavigation === 'Status'}
+          selected={navigation.mainNavigation === 'Status'}
           onPress={() => {
             mainNavigationAction('Status');
           }} >
@@ -64,7 +49,7 @@ export class MainNavigation extends Component {
         <TabBarIOS.Item
           title="Timeline"
           icon={require('./icons/Timeline.png')}
-          selected={mainNavigation === 'Timeline'}
+          selected={navigation.mainNavigation === 'Timeline'}
           onPress={() => {
             mainNavigationAction('Timeline');
           }} >
@@ -74,7 +59,7 @@ export class MainNavigation extends Component {
         <TabBarIOS.Item
           title="Results"
           icon={require('./icons/Results.png')}
-          selected={mainNavigation === 'Results'}
+          selected={navigation.mainNavigation === 'Results'}
           onPress={() => {
             mainNavigationAction('Results');
           }}>
@@ -84,7 +69,7 @@ export class MainNavigation extends Component {
         <TabBarIOS.Item
           title="Knowledge"
           icon={require('./icons/Knowledge.png')}
-          selected={mainNavigation === 'Knowledge'}
+          selected={navigation.mainNavigation === 'Knowledge'}
           onPress={() => {
             mainNavigationAction('Knowledge');
           }}>
@@ -94,7 +79,7 @@ export class MainNavigation extends Component {
         <TabBarIOS.Item
           title="More"
           icon={require('./icons/More.png')}
-          selected={mainNavigation === 'More'}
+          selected={navigation.mainNavigation === 'More'}
           onPress={() => {
             mainNavigationAction('More');
           }}>

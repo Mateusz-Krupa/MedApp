@@ -1,8 +1,10 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, combineReducers,
+ applyMiddleware, bindActionCreators } from 'redux'
 // import reduxPromise from 'redux-promise';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
-import mainReducer from './reducers';
+import resultsReducers from './reducers/resultsReducers';
+import navigationReducers from './reducers/navigationReducers';
 
 const getMiddleware = () => {
   if (process.env.NODE_ENV === 'production') {
@@ -14,16 +16,14 @@ const getMiddleware = () => {
 }
 
 
+const reducers = combineReducers({
+  navigation: navigationReducers
+})
+
 const configureStore = () => {
-  return createStore(mainReducer,
+  return createStore(reducers,
     {
-      mainNavigation: 'Results',
-      urineReqults: {
-        protein: [],
-        creatine: [],
-        potassium: []
-      },
-      resultsModalVisible: false
+      
     },
     getMiddleware()
   );

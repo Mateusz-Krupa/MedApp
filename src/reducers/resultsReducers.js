@@ -1,24 +1,7 @@
-import * as actionTypes from './actionTypes'
+import * as actionTypes from '../actionTypes'
 
 
-import Immutable, { Map } from 'immutable'
-
-
-// // const initialState = Immutable.fromJS(
-// //   {
-// //     mainNavigation: 'Results',
-// //     urineReqults: {
-// //       protein: [],
-// //       creatine: [],
-// //       potassium: []
-// //     },
-// //     resultsModalVisible: false
-// //   }
-// )
-
-
-
-const mainReducer = (state, action) => {
+const resultsReducers = (state, action) => {
   switch (action.type) {
     case actionTypes.MAIN_NAVIGATION_ACTION:
       return {
@@ -42,5 +25,5 @@ const mainReducer = (state, action) => {
   }
 }
 
-export default mainReducer;
+export default resultsReducers;
 
