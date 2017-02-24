@@ -46,7 +46,6 @@ export default class BarChart extends Component {
     }
   }
 
-
   toggleHighlight(i) {
     this.setState({
       barColour: [

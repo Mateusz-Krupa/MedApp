@@ -15,26 +15,14 @@ import {
   StatusBar,
   Modal
 } from 'react-native';
+import * as actions from '../../actions';
+import configureStore from '../../store';
 
 export default class Results extends Component {
 
 
   constructor(props) {
     super(props);
-    this.data = [
-      { value: 2, label: "1" },
-      { value: 5, label: "2" },
-      { value: 4, label: "3" },
-      { value: 1, label: '4' },
-      { value: 2, label: "5" },
-      { value: 3, label: "6" },
-      { value: 1, label: "7" },
-      { value: 2, label: "8" },
-      { value: 3, label: '9' },
-      { value: 1, label: '10' },
-      { value: 2, label: '11' },
-      { value: 3, label: '12' }
-    ]
     this.config = {
       height: 140,
     }
@@ -43,33 +31,35 @@ export default class Results extends Component {
       this.setState({ resultsModalVisible: visible });
     };
 
-    this.state = {
-      resultsModalVisible: false,
-      protein: [],
-      creatine: [],
-      potassium: []
-
-    }
-
+    this.store = configureStore();
+    this.state = this.store.getState();
     this.getData();
   }
 
-
-  getData() {
-    fetch("http://localhost:3000/survey").then(res => res.json())
+  getData(){
+    let promise = fetch("http://localhost:3000/survey")
+    .then(res => res.json())
       .then((data) => {
-        let protein = data.urine.map(item => { return { value: item.protein, label: "1" } });
-        let creatine = data.urine.map(item => { return { value: item.creatine, label: "1" } });
-        let potassium = data.urine.map(item => { return { value: item.potassium, label: "1" } });
-        this.setState({
+        let protein = data.urine.map(item => { return { value: item.protein, label: item.label } });
+        let creatine = data.urine.map(item => { return { value: item.creatine, label: item.label } });
+        let potassium = data.urine.map(item => { return { value: item.potassium, label: item.label} });
+        let value = {
           protein: protein,
           creatine: creatine,
           potassium: potassium
-        });
-
-        // console.log(this.state);
+        }
+        this.store.dispatch(actions.reciveUrineResults(value));
       });
+  }
 
+  componentDidMount() {
+    this.ubsubscribe = this.store.subscribe(() => {
+      this.setState(this.store.getState());
+    })
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
   }
 
   onPress() {
@@ -83,11 +73,11 @@ export default class Results extends Component {
           <View style={styles.graphBox}>
             <TopBar onPress={this.onPress} buttonText="More" title="Protein in urine 24h (mg)"></TopBar>
             <View style={COMMON_STYLES.box}>
-              <BarChart data={this.state.protein} config={this.config}></BarChart>
+              <BarChart data={this.state.urineReqults.protein} config={this.config}></BarChart>
             </View>
             <BoxLinkBar text="See all entries"
               onPress={() => {
-                this.setResultsModalVisible(true)
+                 this.store.dispatch(actions.showResultsModal(true))
               }}
             > </BoxLinkBar>
           </View>
@@ -95,10 +85,10 @@ export default class Results extends Component {
           <View style={styles.graphBox}>
             <TopBar onPress={this.onPress} buttonText="More" title="Creatinine (ug/dl)"></TopBar>
             <View style={COMMON_STYLES.box}>
-              <BarChart data={this.state.creatine} config={this.config} bar="#EF3835"></BarChart>
+              <BarChart data={this.state.urineReqults.creatine} config={this.config} bar="#EF3835"></BarChart>
             </View>
             <BoxLinkBar text="See all entries" onPress={() => {
-              this.setResultsModalVisible(true)
+              this.store.dispatch(actions.showResultsModal(true))
             }}
             > </BoxLinkBar>
           </View>
@@ -106,10 +96,10 @@ export default class Results extends Component {
           <View style={styles.graphBox}>
             <TopBar onPress={this.onPress} buttonText="More" title="Potassium (ug/dl)"></TopBar>
             <View style={COMMON_STYLES.box}>
-              <BarChart data={this.state.potassium} config={this.config}></BarChart>
+              <BarChart data={this.state.urineReqults.potassium} config={this.config}></BarChart>
             </View>
             <BoxLinkBar text="See all entries" onPress={() => {
-              this.setResultsModalVisible(true)
+              this.store.dispatch(actions.showResultsModal(true))
             }}
             ></BoxLinkBar>
           </View>

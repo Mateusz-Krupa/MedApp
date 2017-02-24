@@ -10,6 +10,9 @@ import TimeLineNavigator from '../TimeLine/TimeLineNavigator';
 import ResultsNavigator from '../Results/ResultsNavigator';
 import Knowledge from '../Knowledge/Knowledge';
 import More from '../More/More';
+import configureStore from '../../store';
+import * as actions from '../../actions';
+
 
 import {
   StyleSheet,
@@ -24,9 +27,22 @@ export default class MainNavigation extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      selectedTab: 'Results'
-    }
+    this.store = configureStore();
+    this.state = this.store.getState();
+  }
+
+  componentDidMount() {
+    this.ubsubscribe = this.store.subscribe(() => {
+      this.setState(this.store.getState());
+    })
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
+  setNavigation(value) {
+    this.store.dispatch(actions.mainNavigationAction(value));
   }
 
   render() {
@@ -37,60 +53,50 @@ export default class MainNavigation extends Component {
         <TabBarIOS.Item
           title="Status"
           icon={require('./icons/Status.png')}
-          selected={this.state.selectedTab === 'Status'}
+          selected={this.state.mainNavigation === 'Status'}
           onPress={() => {
-            this.setState({
-              selectedTab: 'Status',
-            });
-          } } >
+            this.setNavigation('Status');
+          }} >
           <Status></Status>
         </TabBarIOS.Item>
 
         <TabBarIOS.Item
           title="Timeline"
           icon={require('./icons/Timeline.png')}
-          selected={this.state.selectedTab === 'Timeline'}
+          selected={this.state.mainNavigation === 'Timeline'}
           onPress={() => {
-            this.setState({
-              selectedTab: 'Timeline',
-            });
-          } } >
+            this.setNavigation('Timeline');
+          }} >
           <TimeLineNavigator></TimeLineNavigator>
         </TabBarIOS.Item>
 
         <TabBarIOS.Item
           title="Results"
           icon={require('./icons/Results.png')}
-          selected={this.state.selectedTab === 'Results'}
+          selected={this.state.mainNavigation === 'Results'}
           onPress={() => {
-            this.setState({
-              selectedTab: 'Results',
-            });
-          } } >
+            this.setNavigation('Results');
+          }}>
           <ResultsNavigator></ResultsNavigator>
         </TabBarIOS.Item>
 
         <TabBarIOS.Item
           title="Knowledge"
           icon={require('./icons/Knowledge.png')}
-          selected={this.state.selectedTab === 'Knowledge'}
+          selected={this.state.mainNavigation === 'Knowledge'}
           onPress={() => {
-            this.setState({
-              selectedTab: 'Knowledge',
-            });
-          } } >
+            this.setNavigation('Knowledge');
+          }}>
           <Knowledge></Knowledge>
         </TabBarIOS.Item>
 
         <TabBarIOS.Item
           title="More"
           icon={require('./icons/More.png')}
-          selected={this.state.selectedTab === 'More'}
+          selected={this.state.mainNavigation === 'More'}
           onPress={() => {
-            this.setState({
-              selectedTab: 'More',
-            });
-          } } >
+            this.setNavigation('More');
+          }}>
           <More></More>
         </TabBarIOS.Item>
 

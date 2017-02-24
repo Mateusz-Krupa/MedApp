@@ -5,7 +5,8 @@
  */
 
 import React, { Component, PropTypes } from 'react';
-import MainNavigation from './src/components/MainNavigation/MainNavigation'
+import MainNavigation from './src/components/MainNavigation/MainNavigation';
+import configureStore from './src/store';
 import {
   AppRegistry,
   StyleSheet,
@@ -13,15 +14,22 @@ import {
   View,
   ScrollView
 } from 'react-native';
-
+import {Provider} from 'react-redux';
 
 export default class MedApp extends Component {
 
+  constructor(){
+    super();
+    this.store = configureStore();
+  } 
+
   render() {
     return (
-      <View style={styles.container}>
-        <MainNavigation></MainNavigation>
-      </View>
+      <Provider store={this.store}>
+        <View style={styles.container}>
+          <MainNavigation></MainNavigation>
+        </View>
+      </Provider>
     );
   }
 }
