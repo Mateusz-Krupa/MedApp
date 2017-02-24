@@ -144,10 +144,7 @@ export default class BarChart extends Component {
   }
 
   render() {
-    console.log(this.props.data);
-    // console.log("do chuja waclawa");
     if (this.props.data.length > 2) {
-      console.log(this.props.data);
       return this.createGraph();
     }
     return (<View></View>);

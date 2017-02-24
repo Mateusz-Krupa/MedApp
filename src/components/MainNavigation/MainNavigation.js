@@ -10,8 +10,9 @@ import TimeLineNavigator from '../TimeLine/TimeLineNavigator';
 import ResultsNavigator from '../Results/ResultsNavigator';
 import Knowledge from '../Knowledge/Knowledge';
 import More from '../More/More';
-import configureStore from '../../store';
 import * as actions from '../../actions';
+
+import { connect } from 'react-redux';
 
 
 import {
@@ -22,30 +23,30 @@ import {
   TabBarIOS
 } from 'react-native';
 
-export default class MainNavigation extends Component {
+export class MainNavigation extends Component {
 
 
   constructor(props) {
     super(props);
-    this.store = configureStore();
-    this.state = this.store.getState();
   }
 
-  componentDidMount() {
-    this.ubsubscribe = this.store.subscribe(() => {
-      this.setState(this.store.getState());
-    })
-  }
+  // componentDidMount() {
+  //   this.ubsubscribe = this.store.subscribe(() => {
+  //     this.setState(this.store.getState());
+  //   })
+  // }
 
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
+  // componentWillUnmount() {
+  //   this.unsubscribe();
+  // }
 
-  setNavigation(value) {
-    this.store.dispatch(actions.mainNavigationAction(value));
-  }
+  // setNavigation(value) {
+  //   console.log(this.state);
+  //   // this.state.actions.mainNavigationAction(value);
+  // }
 
   render() {
+    const {mainNavigation, mainNavigationAction} = this.props;
     return (
       <TabBarIOS
         tintColor={styles.navigationButtonText.color}
@@ -53,9 +54,9 @@ export default class MainNavigation extends Component {
         <TabBarIOS.Item
           title="Status"
           icon={require('./icons/Status.png')}
-          selected={this.state.mainNavigation === 'Status'}
+          selected={mainNavigation === 'Status'}
           onPress={() => {
-            this.setNavigation('Status');
+            mainNavigationAction('Status');
           }} >
           <Status></Status>
         </TabBarIOS.Item>
@@ -63,9 +64,9 @@ export default class MainNavigation extends Component {
         <TabBarIOS.Item
           title="Timeline"
           icon={require('./icons/Timeline.png')}
-          selected={this.state.mainNavigation === 'Timeline'}
+          selected={mainNavigation === 'Timeline'}
           onPress={() => {
-            this.setNavigation('Timeline');
+            mainNavigationAction('Timeline');
           }} >
           <TimeLineNavigator></TimeLineNavigator>
         </TabBarIOS.Item>
@@ -73,9 +74,9 @@ export default class MainNavigation extends Component {
         <TabBarIOS.Item
           title="Results"
           icon={require('./icons/Results.png')}
-          selected={this.state.mainNavigation === 'Results'}
+          selected={mainNavigation === 'Results'}
           onPress={() => {
-            this.setNavigation('Results');
+            mainNavigationAction('Results');
           }}>
           <ResultsNavigator></ResultsNavigator>
         </TabBarIOS.Item>
@@ -83,9 +84,9 @@ export default class MainNavigation extends Component {
         <TabBarIOS.Item
           title="Knowledge"
           icon={require('./icons/Knowledge.png')}
-          selected={this.state.mainNavigation === 'Knowledge'}
+          selected={mainNavigation === 'Knowledge'}
           onPress={() => {
-            this.setNavigation('Knowledge');
+            mainNavigationAction('Knowledge');
           }}>
           <Knowledge></Knowledge>
         </TabBarIOS.Item>
@@ -93,9 +94,9 @@ export default class MainNavigation extends Component {
         <TabBarIOS.Item
           title="More"
           icon={require('./icons/More.png')}
-          selected={this.state.mainNavigation === 'More'}
+          selected={mainNavigation === 'More'}
           onPress={() => {
-            this.setNavigation('More');
+            mainNavigationAction('More');
           }}>
           <More></More>
         </TabBarIOS.Item>
@@ -130,3 +131,6 @@ const styles = StyleSheet.create({
     color: '#929292'
   }
 });
+
+console.log(actions);
+export default connect(state => state, actions)(MainNavigation);

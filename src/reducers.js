@@ -1,22 +1,37 @@
-export const MAIN_NAVIGATION_ACTION = "MAIN_NAVIGATION_ACTION";
-export const RECIVE_URINE_RESULTS = "RECIVE_URINE_RESULTS";
-export const SHOW_RESULTS_MODAL = "SHOW_RESULTS_MODAL";
+import * as actionTypes from './actionTypes'
+
+
+import Immutable, { Map } from 'immutable'
+
+
+// // const initialState = Immutable.fromJS(
+// //   {
+// //     mainNavigation: 'Results',
+// //     urineReqults: {
+// //       protein: [],
+// //       creatine: [],
+// //       potassium: []
+// //     },
+// //     resultsModalVisible: false
+// //   }
+// )
+
+
 
 const mainReducer = (state, action) => {
-  console.log(state, action);
-  switch(action.type){
-    case MAIN_NAVIGATION_ACTION: 
+  switch (action.type) {
+    case actionTypes.MAIN_NAVIGATION_ACTION:
       return {
         ...state,
         mainNavigation: action.value
       }
-    case RECIVE_URINE_RESULTS: {
+    case actionTypes.RECIVE_URINE_RESULTS: {
       return {
         ...state,
         urineReqults: action.value
-      }  
+      }
     }
-    case SHOW_RESULTS_MODAL: 
+    case actionTypes.SHOW_RESULTS_MODAL:
       return {
         ...state,
         resultsModalVisible: action.value
@@ -28,3 +43,4 @@ const mainReducer = (state, action) => {
 }
 
 export default mainReducer;
+

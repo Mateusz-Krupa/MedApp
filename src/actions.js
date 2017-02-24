@@ -1,15 +1,16 @@
-import {MAIN_NAVIGATION_ACTION, RECIVE_URINE_RESULTS} from './reducers';
+import * as actionTypes from './actionTypes'
+
 export const mainNavigationAction = (value) => ({
-    type: MAIN_NAVIGATION_ACTION,
+    type: actionTypes.MAIN_NAVIGATION_ACTION,
     value: value
 });
 
 export const reciveUrineResults = (results) => ({
-  type: "RECIVE_URINE_RESULTS",
+  type: actionTypes.RECIVE_URINE_RESULTS,
   value: results
 });
 
 export const showResultsModal = (results) => ({
-  type: "SHOW_RESULTS_MODAL",
+  type: actionTypes.SHOW_RESULTS_MODAL,
   value: results
 });

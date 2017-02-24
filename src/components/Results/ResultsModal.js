@@ -18,7 +18,6 @@ import ResultList from './ResultList'
 
 export default class Results extends Component {
 
-
   constructor(props) {
     super(props);
     this.config = {
