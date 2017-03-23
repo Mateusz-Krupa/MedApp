@@ -25,13 +25,13 @@ import {
 
 export class MainNavigation extends Component {
 
-
   constructor(props) {
     super(props);
   }
 
   render() {
-    const {mainNavigation, navigation} = this.props;
+    const {mainNavigationAction, mainNavigation} = this.props;
+    
     return (
       <TabBarIOS
         tintColor={styles.navigationButtonText.color}
@@ -39,7 +39,7 @@ export class MainNavigation extends Component {
         <TabBarIOS.Item
           title="Status"
           icon={require('./icons/Status.png')}
-          selected={navigation.mainNavigation === 'Status'}
+          selected={mainNavigation === 'Status'}
           onPress={() => {
             mainNavigationAction('Status');
           }} >
@@ -49,7 +49,7 @@ export class MainNavigation extends Component {
         <TabBarIOS.Item
           title="Timeline"
           icon={require('./icons/Timeline.png')}
-          selected={navigation.mainNavigation === 'Timeline'}
+          selected={mainNavigation === 'Timeline'}
           onPress={() => {
             mainNavigationAction('Timeline');
           }} >
@@ -59,7 +59,7 @@ export class MainNavigation extends Component {
         <TabBarIOS.Item
           title="Results"
           icon={require('./icons/Results.png')}
-          selected={navigation.mainNavigation === 'Results'}
+          selected={mainNavigation === 'Results'}
           onPress={() => {
             mainNavigationAction('Results');
           }}>
@@ -69,7 +69,7 @@ export class MainNavigation extends Component {
         <TabBarIOS.Item
           title="Knowledge"
           icon={require('./icons/Knowledge.png')}
-          selected={navigation.mainNavigation === 'Knowledge'}
+          selected={mainNavigation === 'Knowledge'}
           onPress={() => {
             mainNavigationAction('Knowledge');
           }}>
@@ -79,7 +79,7 @@ export class MainNavigation extends Component {
         <TabBarIOS.Item
           title="More"
           icon={require('./icons/More.png')}
-          selected={navigation.mainNavigation === 'More'}
+          selected={mainNavigation === 'More'}
           onPress={() => {
             mainNavigationAction('More');
           }}>
@@ -118,4 +118,4 @@ const styles = StyleSheet.create({
 });
 
 console.log(actions);
-export default connect(state => state, actions)(MainNavigation);
+export default connect(state => state.navigation.toJS(), actions)(MainNavigation);

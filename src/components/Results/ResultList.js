@@ -3,40 +3,60 @@ import {
   ListView,
   Text,
   View,
-  StyleSheet
+  StyleSheet,
+  ActivityIndicator,
+  TouchableHighlight
 } from 'react-native';
 
 
 export default class ResultList extends Component {
-  constructor() {
-    super();
-    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-    this.state = {
-       dataSource: ds.cloneWithRows([{date: "01.05.2016", value: "124"}, {date: "02.05.2016", value: "134"},
-       {date: "04.05.2016", value: "124"}, {date: "05.05.2016", value: "125"},
-       {date: "07.05.2016", value: "200"}, {date: "08.05.2016", value: "134"},{date: "01.05.2016", value: "124"}, {date: "02.05.2016", value: "134"},
-       {date: "04.05.2016", value: "124"}, {date: "05.05.2016", value: "125"},
-       {date: "07.05.2016", value: "200"}, {date: "08.05.2016", value: "134"}]),
-    };
+  constructor(props) {
+    super(props);
+    this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+    this.dataSource = this.ds.cloneWithRows([]);
+  }
+  
+  componentWillReceiveProps(nextProps) {
+    this.dataSource = this.ds.cloneWithRows(nextProps.data);
   }
 
   render() {
-    return (
-
-      <View style={styles.listWrapper}>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={(rowData) => { 
-            return (<View style={styles.row}>
-              <Text style={styles.rowText}>
-                {rowData.date}
-              </Text>
-              <Text style={styles.rowText}>
-                {rowData.value}
-              </Text>
-            </View>);
-          }}
+    const listView = () => {
+      return (
+        <View style={styles.listWrapper}>
+          <ListView
+            dataSource={this.dataSource}
+            renderRow={(rowData) => {
+              return (<TouchableHighlight onPress={ () => alert("ble") }> 
+                <View style={styles.row}> 
+                  <Text style={styles.rowText}>
+                    {rowData.date}
+                  </Text>
+                  <Text style={styles.rowText}>
+                    {rowData.value}
+                  </Text>
+                </View>
+              </TouchableHighlight>);
+            }}
           />
+        </View>
+      )
+    }
+
+    const spinner = (
+      <ActivityIndicator
+        size="large"
+        style={styles.loader}
+      />
+    )
+
+    const content = (() => {
+      return this.props.data.length > 0 ? listView() : spinner
+    })()
+
+    return (
+      <View>
+        {content}
       </View>
     );
   }
@@ -55,6 +75,11 @@ const styles = StyleSheet.create({
   },
   rowText: {
     padding: 20
+  },
+  loader: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 8
   }
 });
 

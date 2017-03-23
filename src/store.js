@@ -17,7 +17,8 @@ const getMiddleware = () => {
 
 
 const reducers = combineReducers({
-  navigation: navigationReducers
+  navigation: navigationReducers,
+  results: resultsReducers
 })
 
 const configureStore = () => {

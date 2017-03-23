@@ -1,29 +1,29 @@
-import * as actionTypes from '../actionTypes'
+import immutable, { fromJS, Map } from 'immutable'
+import { RECIVE_URINE_RESULTS, SHOW_RESULTS_MODAL, RESULTS_DETAILS_NAME, RESULTS_DETAILS_DATA } from '../actionTypes'
+import { handleActions } from 'redux-actions'
 
+const initialState = fromJS({
+  resultsModalVisible: false,
+  urineReqults: {
+    creatine: [],
+    protein: [],
+    potassium: []
+  },
+  resultsDetailsName: "Protein",
+  resultsDetailsData: []
+});
 
-const resultsReducers = (state, action) => {
-  switch (action.type) {
-    case actionTypes.MAIN_NAVIGATION_ACTION:
-      return {
-        ...state,
-        mainNavigation: action.value
-      }
-    case actionTypes.RECIVE_URINE_RESULTS: {
-      return {
-        ...state,
-        urineReqults: action.value
-      }
-    }
-    case actionTypes.SHOW_RESULTS_MODAL:
-      return {
-        ...state,
-        resultsModalVisible: action.value
-      }
-    default: {
-      return state;
-    }
+export default handleActions({
+  [SHOW_RESULTS_MODAL]: (state, action) => {
+    return state.set("resultsModalVisible", action.value);
+  },
+  [RECIVE_URINE_RESULTS]: (state, action) => {
+    return state.set("urineReqults", action.value);
+  },
+  [RESULTS_DETAILS_DATA]: (state, action) => {
+    return state.set("resultsDetailsData", action.value);
+  },
+  [RESULTS_DETAILS_NAME]: (state, action) => {
+    return state.set("resultsDetailsName", action.value);
   }
-}
-
-export default resultsReducers;
-
+}, initialState)

@@ -5,29 +5,20 @@ import {
   StyleSheet,
   Text,
   View,
-  ListView,
   StatusBar,
   Modal,
   Navigator,
   ScrollView
 } from 'react-native';
-
 import ResultList from './ResultList'
+import * as actions from '../../actions/ResultsActions';
+import { connect } from 'react-redux';
 
 
-
-export default class Results extends Component {
+export default class ResultsModal extends Component {
 
   constructor(props) {
     super(props);
-    this.config = {
-      height: 140,
-    }
-
-    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-    this.state = {
-      dataSource: ds.cloneWithRows([{ date: "01.05.2016", value: "124" }, { date: "02.05.2016", value: "134" }]),
-    }
   }
 
   render() {
@@ -43,13 +34,14 @@ export default class Results extends Component {
           />
         <Navigator
           initialRoute={{ title: 'Modal', index: 0 }}
+          style={styles.viewContainer}
           renderScene={(route, navigator) =>
-            <View>
+            <View style={styles.viewContainer}> 
               <View style={styles.legend}>
-                <Text style={styles.legendText}>[mg/dl]</Text>
+                <Text style={styles.legendText}>{this.props.unit}</Text>
               </View>
-              <ScrollView style={styles.viewContainer}>
-                <ResultList />
+              <ScrollView>
+                <ResultList  data={this.props.data}/>
               </ScrollView>
             </View>
           }
@@ -63,7 +55,7 @@ export default class Results extends Component {
                 RightButton: (route, navigator, index, navState) =>
                 { return; },
                 Title: (route, navigator, index, navState) =>
-                { return (<Text style={COMMON_STYLES.navigatorModalElement}>Results</Text>) },
+                { return (<Text style={COMMON_STYLES.navigatorModalElement}> {this.props.title} </Text>) },
               }}
               style={COMMON_STYLES.navigatorModal}
               />
@@ -73,7 +65,6 @@ export default class Results extends Component {
     );
   };
 }
-
 
 const styles = StyleSheet.create({
   legend: {

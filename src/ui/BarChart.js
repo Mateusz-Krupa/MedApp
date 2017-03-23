@@ -6,7 +6,8 @@ import Svg, {
   Line,
   Path,
   Rect,
-  Text
+  Text,
+  ActivityIndicator
 } from 'react-native-svg'
 
 // d3 lib
@@ -41,6 +42,9 @@ export default class BarChart extends Component {
 
   constructor(props) {
     super(props);
+  }
+
+  init(){
     this.state = {
       barColour: this.props.data.map(() => this.props.bar)
     }
@@ -145,9 +149,12 @@ export default class BarChart extends Component {
 
   render() {
     if (this.props.data.length > 2) {
+      this.init();
       return this.createGraph();
     }
-    return (<View></View>);
+    return (<View> 
+      <Text> Loading... </Text>
+    </View>);
   }
 
 }
