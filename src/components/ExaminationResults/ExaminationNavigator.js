@@ -1,25 +1,26 @@
 
-import { COMMON_STYLES } from '../../styles/global';
+/**
+* Sample React Native App
+* https://github.com/facebook/react-native
+* @flow
+*/
+import {COMMON_STYLES} from '../../styles/global'
 import React, { Component, PropTypes } from 'react';
+import Examination from './Examination'
 import {
-  AppRegistry,
+  Navigator,
   StyleSheet,
   Text,
-  View,
-  ScrollView,
-  Navigator
 } from 'react-native';
-import TimeLine from './TimeLine'
 
-
-export default class TimeLineNavigator extends Component {
+export default class ExaminationNavigator extends Component {
 
   render() {
     return (
       <Navigator
-        initialRoute={{ title: 'Time Line', index: 0 }}
+        initialRoute={{ title: 'Awesome Scene', index: 0 }}
         renderScene={(route, navigator) =>
-          <TimeLine></TimeLine>
+          <Examination></Examination>
         }
         style={{ }}
         navigationBar={
@@ -28,19 +29,19 @@ export default class TimeLineNavigator extends Component {
               LeftButton: (route, navigator, index, navState) =>
               { return; },
               RightButton: (route, navigator, index, navState) =>
-              { return; },
+              { return (<Text style={COMMON_STYLES.navigatorElement}>Cancel</Text>); },
               Title: (route, navigator, index, navState) =>
-              { return (<Text style={COMMON_STYLES.navigatorElement}>Time Line</Text>); },
+              { return (<Text style={COMMON_STYLES.navigatorElement}>New Blood Test</Text>); },
             }}
-            style={COMMON_STYLES.navigator}
+            style={COMMON_STYLES.navigatorModal}
             />
         }
         />
     );
-  }  
-
+  }
 }
 
 const styles = StyleSheet.create({
 
 });
+

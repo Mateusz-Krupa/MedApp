@@ -3,7 +3,7 @@ import { handleActions } from 'redux-actions'
 import { MAIN_NAVIGATION_ACTION } from '../actionTypes'
 
 const initialState = fromJS({
-  mainNavigation: "Results"
+  mainNavigation: "Timeline"
 });
 
 export default handleActions({

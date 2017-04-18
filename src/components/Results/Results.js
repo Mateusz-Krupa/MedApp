@@ -15,6 +15,7 @@ import {
 
 import * as actions from '../../actions/ResultsActions';
 import { connect } from 'react-redux';
+import moment from 'moment/moment'
 
 
 export class Results extends Component {
@@ -36,7 +37,7 @@ export class Results extends Component {
         let modalResultsData = data.urine.map((item) => {
           console.log(item);
           return {
-            date: new Date(item.date).toString('yyyy-MM-dd'),
+            date: moment(item.date).format('DD.MM.YYYY'),
             value: item[filtered]
           }
         });
@@ -55,19 +56,18 @@ export class Results extends Component {
         
         data.urine.forEach(
           item => {
-              let itemDate = new Date(item.date); 
-              let itemDayAndMonth = itemDate.getDay() + "." + itemDate.getMonth(); 
+              let itemDate = moment(item.date).format('DD.MM');
               protein.push({
                 value: item.protein,
-                label: itemDayAndMonth
+                label: itemDate
               });
               creatine.push({
                 value: item.creatine, 
-                label: itemDayAndMonth
+                label: itemDate
               });
               potassium.push({
                 value: item.potassium, 
-                label: itemDayAndMonth
+                label: itemDate
               });
           }
         );

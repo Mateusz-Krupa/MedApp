@@ -5,6 +5,7 @@ import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import resultsReducers from './reducers/resultsReducers';
 import navigationReducers from './reducers/navigationReducers';
+import addReducers from './reducers/addReducers';
 
 const getMiddleware = () => {
   if (process.env.NODE_ENV === 'production') {
@@ -18,7 +19,8 @@ const getMiddleware = () => {
 
 const reducers = combineReducers({
   navigation: navigationReducers,
-  results: resultsReducers
+  results: resultsReducers, 
+  add: addReducers
 })
 
 const configureStore = () => {

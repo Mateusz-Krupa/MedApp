@@ -117,5 +117,4 @@ const styles = StyleSheet.create({
   }
 });
 
-console.log(actions);
 export default connect(state => state.navigation.toJS(), actions)(MainNavigation);
