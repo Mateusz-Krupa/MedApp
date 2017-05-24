@@ -18,7 +18,7 @@ export default class ExaminationNavigator extends Component {
   render() {
     return (
       <Navigator
-        initialRoute={{ title: 'Awesome Scene', index: 0 }}
+        initialRoute={{ title: 'Examination Modal', index: 0 }}
         renderScene={(route, navigator) =>
           <Examination></Examination>
         }
@@ -29,7 +29,9 @@ export default class ExaminationNavigator extends Component {
               LeftButton: (route, navigator, index, navState) =>
               { return; },
               RightButton: (route, navigator, index, navState) =>
-              { return (<Text style={COMMON_STYLES.navigatorElement}>Cancel</Text>); },
+              { return (<Text onPress={ () => alert("ble") }
+                style={COMMON_STYLES.navigatorElement}>Cancel</Text>); 
+              },
               Title: (route, navigator, index, navState) =>
               { return (<Text style={COMMON_STYLES.navigatorElement}>New Blood Test</Text>); },
             }}

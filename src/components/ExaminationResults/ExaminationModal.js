@@ -16,7 +16,6 @@ export class ExaminationModal extends Component {
   }
 
   render() {
-    const {showAddModalAction, addModal} = this.props;
     return (
       <Modal
         animationType={"slide"}
