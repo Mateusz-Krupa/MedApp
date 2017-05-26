@@ -6,7 +6,7 @@ import {
   View
 } from 'react-native';
 import AddList from './AddList'
-import * as actions from '../../actions/AddActions';
+import * as actions from '../../actions/ModalActions';
 import { connect } from 'react-redux';
 
 export class AddModal extends Component {
@@ -16,15 +16,16 @@ export class AddModal extends Component {
   }
 
   render() {
-    const {showAddModalAction, addModal} = this.props;
+    const {setModal, modal, setModalType} = this.props;
+
     return (
       <Modal
         animationType={"slide"}
         transparent={false}
-        visible={ addModal }
+        visible={ modal === "ADD_MODAL"}
         onRequestClose={() => { }}
       >
-        <AddList onClose={ showAddModalAction }>  </AddList>
+        <AddList setModal={ setModal } setModalType={setModalType}>  </AddList>
       </Modal>
     );
   };
@@ -33,4 +34,4 @@ export class AddModal extends Component {
 const styles = StyleSheet.create({
 });
 
-export default connect(state => state.add.toJS(), actions)(AddModal);
+export default connect(state => state.modal.toJS(), actions)(AddModal);

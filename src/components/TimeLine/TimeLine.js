@@ -16,7 +16,7 @@ import {
   Image,
   ScrollView
 } from 'react-native';
-import * as actions from '../../actions/AddActions';
+import * as actions from '../../actions/ModalActions';
 import { connect } from 'react-redux';
 
 export class TimeLine extends Component {
@@ -27,7 +27,7 @@ export class TimeLine extends Component {
   }
 
   render() {
-    const {showAddModalAction, addModal} = this.props;
+    const {setModal, setModalType} = this.props;
     return (
       <View style={styles.timeLineContainer}>
         <ScrollView stye={styles.timeLine}>
@@ -48,7 +48,7 @@ export class TimeLine extends Component {
                 <Text style={styles.timeLineTextDetails}> 10:00, Lux Med </Text>
               </View>
               <View style={styles.timeLineActions}>
-                <Text style={styles.timeLineActionsText}> ADD RESULTS </Text>
+                {/*<Text style={styles.timeLineActionsText}> ADD RESULTS </Text>*/}
               </View>
             </View>
 
@@ -65,7 +65,12 @@ export class TimeLine extends Component {
                 <Text style={styles.timeLineTextDetails}> 10:00, Lux Med </Text>
               </View>
               <View style={styles.timeLineActions}>
-                <Text style={styles.timeLineActionsText}> ADD RESULTS </Text>
+                <TouchableHighlight onPress={() => {
+                      this.props.setModal("BLOOD_TEST_NEW")
+                      this.props.setModalType("BLOOD");
+                  }}>
+                  <Text style={styles.timeLineActionsText}> ADD RESULTS </Text>
+                </TouchableHighlight>
               </View>
             </View>
 
@@ -90,12 +95,12 @@ export class TimeLine extends Component {
                 <Text style={styles.timeLineTextDetails}> 10:00, Lux Med </Text>
               </View>
               <View style={styles.timeLineActions}>
-                <Text style={styles.timeLineActionsText}> ADD RESULTS </Text>
+                {/*<Text style={styles.timeLineActionsText}> ADD RESULTS </Text>*/}
               </View>
             </View>
           </View>
         </ScrollView>
-        <TouchableHighlight style={styles.addNewButton} onPress={() => { showAddModalAction(true) }}>
+        <TouchableHighlight style={styles.addNewButton} onPress={() => { setModal("ADD_MODAL") }}>
           <Image
             source={require('../../assets/icons/add.png')}
           />

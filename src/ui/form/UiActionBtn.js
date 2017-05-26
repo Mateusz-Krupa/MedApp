@@ -17,7 +17,7 @@ export default class UiActionBtn extends Component {
         <TouchableHighlight style={styles.actionBtn}  onPress={this.props.onPressAction}>  
           <View >
             <Text style={styles.actionBtnText}>
-                {this.props.label}}
+                {this.props.label}
             </Text>
           </View>
         </TouchableHighlight>

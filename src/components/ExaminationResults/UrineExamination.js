@@ -28,7 +28,7 @@ import UiActionBtn from '../../ui/form/UiActionBtn'
 
 
 
-export default class Examination extends Component {
+export default class UrineExamination extends Component {
 
   constructor(props) {
     super(props);
@@ -47,19 +47,19 @@ export default class Examination extends Component {
     return (
       <View style={styles.view}>
         <ScrollView>
+        
           <UiFormHeader label="Overview"></UiFormHeader>
           <UiFormDate label={"Date"} value={"Mon, 22 Jan 2017 10:20"}></UiFormDate>
           <UiFormInput label={"Location"} value={"None"}></UiFormInput>
-          <UiFormSwitch label={"Add to calendar"} value={this.state.addToCalendar} 
-            onChange={ this.handleSwitchChange } ></UiFormSwitch>   
+          <UiFormSwitch label={"Add to calendar"} value={this.state.addToCalendar} onChange={ this.handleSwitchChange } ></UiFormSwitch>   
           <UiFormHeader label="Results"></UiFormHeader>
-          <UiFormInput label={"Creatine"} value={"mg/dl"}></UiFormInput>
-          <UiFormInput label={"Potassium"} value={"mg/dl"}></UiFormInput>
-          <UiFormInput label={"Sodium"} value={"mg/dl"}></UiFormInput>
+          <UiFormInput label={"Urine volume"} value={"mg/dl"}></UiFormInput>
+          <UiFormInput label={"Protein in sample"} value={"mg/dl"}></UiFormInput>
+          <UiFormInput label={"Protein daily"} value={"mg/dl"}></UiFormInput>
           <UiFormHeader label="Notes"></UiFormHeader>
           <UiFormTextArea value="write"></UiFormTextArea>
         </ScrollView>
-        <UiActionBtn label="update" onPressAction={() => alert("updated")} ></UiActionBtn>
+        <UiActionBtn label="Update" onPressAction={() => this.props.setModal("NULL")} ></UiActionBtn>
       </View>
     );
   }

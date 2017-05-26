@@ -6,7 +6,7 @@ import {
   View
 } from 'react-native';
 import ExaminationNavigator from './ExaminationNavigator'
-import * as actions from '../../actions/AddActions';
+import * as actions from '../../actions/ModalActions';
 import { connect } from 'react-redux';
 
 export class ExaminationModal extends Component {
@@ -16,14 +16,15 @@ export class ExaminationModal extends Component {
   }
 
   render() {
+    const { setModal, modal, modalType} = this.props;
     return (
       <Modal
         animationType={"slide"}
         transparent={false}
-        visible={ true }
+        visible={ modal === "BLOOD_TEST_NEW"}
         onRequestClose={() => { }}
       >
-        <ExaminationNavigator>  </ExaminationNavigator>
+        <ExaminationNavigator setModal={ setModal } modalType={ modalType }>  </ExaminationNavigator>
       </Modal>
     );
   };
@@ -32,4 +33,4 @@ export class ExaminationModal extends Component {
 const styles = StyleSheet.create({
 });
 
-export default connect(state => state.add.toJS(), actions)(ExaminationModal);
+export default connect(state => state.modal.toJS(), actions)(ExaminationModal);

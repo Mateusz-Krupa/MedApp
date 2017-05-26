@@ -108,7 +108,7 @@ export default class BarChart extends Component {
               {
                 this.props.data.map((d, i) => (
                   <G key={i + 1} translate={x(d.label) + labelDx + ",0"}>
-                    <Text fill={this.props.text} y={labelDistance}>{d.label}</Text>
+                    {/*<Text fill={this.props.text} y={labelDistance}>{d.label}</Text>*/}
                   </G>
                 ))
               }

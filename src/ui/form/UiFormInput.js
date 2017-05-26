@@ -31,7 +31,7 @@ export default class UiFormInput extends Component {
 const styles = StyleSheet.create({
   textInput: {
     height: 40,
-    width: 200,
+    width: 150,
     textAlign: "right"
   },
   formLabel: {

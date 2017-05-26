@@ -53,7 +53,10 @@ export default class AddList extends Component {
           </View>
         </TouchableHighlight>
 
-        <TouchableHighlight onPress={() => { alert("press press"); }}>
+        <TouchableHighlight onPress={() => { 
+            this.props.setModal("BLOOD_TEST_NEW")
+            this.props.setModalType("BLOOD");
+            }}>
           <View style={styles.addLine}>
             <View style={styles.addIcon}>
               <Image
@@ -66,7 +69,13 @@ export default class AddList extends Component {
           </View>
         </TouchableHighlight>
 
-        <TouchableHighlight onPress={() => { alert("press press"); }}>
+        <TouchableHighlight onPress={() => 
+          { 
+          this.props.setModal("BLOOD_TEST_NEW")
+          this.props.setModalType("URINE");
+        }}>
+          
+          
           <View style={styles.addLine}>
             <View style={styles.addIcon}>
               <Image
@@ -79,7 +88,7 @@ export default class AddList extends Component {
           </View>
         </TouchableHighlight>
 
-        <TouchableHighlight onPress={() => { this.props.onClose(false) }}>
+        <TouchableHighlight onPress={() => { this.props.setModal("NONE") }}>
           <View style={styles.addLine}>
             <View style={styles.addIcon}>
               <Image

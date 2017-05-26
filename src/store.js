@@ -6,6 +6,7 @@ import createLogger from 'redux-logger';
 import resultsReducers from './reducers/resultsReducers';
 import navigationReducers from './reducers/navigationReducers';
 import addReducers from './reducers/addReducers';
+import modalReducers from './reducers/modalReducers'
 
 const getMiddleware = () => {
   if (process.env.NODE_ENV === 'production') {
@@ -20,7 +21,8 @@ const getMiddleware = () => {
 const reducers = combineReducers({
   navigation: navigationReducers,
   results: resultsReducers, 
-  add: addReducers
+  add: addReducers,
+  modal: modalReducers
 })
 
 const configureStore = () => {
